@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,8 +9,15 @@
 </head>
 <body>
     <header>
-        <h1>D&D Side Quest Board</h1>
-        <button id="new-quest-btn" class="btn-primary">+ New Quest</button>
+        <div class="header-left">
+            <h1>D&D Side Quest Board</h1>
+        </div>
+        <div class="header-right">
+            <button id="theme-toggle" class="theme-toggle" title="Toggle dark mode">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="new-quest-btn" class="btn-primary">+ New Quest</button>
+        </div>
     </header>
 
     <main>

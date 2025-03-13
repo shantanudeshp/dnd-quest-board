@@ -8,6 +8,7 @@ const completedQuestsContainer = document.getElementById('completed-quests');
 const completedQuestsColumn = document.getElementById('completed-quests-column');
 const showCompletedCheckbox = document.getElementById('show-completed');
 const questCardTemplate = document.getElementById('quest-card-template');
+const themeToggle = document.getElementById('theme-toggle');
 
 // API URL - Change this to match your deployed backend URL
 // For local development
@@ -15,9 +16,37 @@ let API_URL = '/api/quests';
 // For production
 // const API_URL = 'https://your-deployed-app.onrender.com/api/quests';
 
+// Theme functionality
+function loadTheme() {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    updateThemeIcon(savedTheme);
+}
+
+function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    updateThemeIcon(newTheme);
+}
+
+function updateThemeIcon(theme) {
+    const icon = themeToggle.querySelector('i');
+    if (theme === 'dark') {
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+    } else {
+        icon.classList.remove('fa-sun');
+        icon.classList.add('fa-moon');
+    }
+}
+
 // Event Listeners
 document.addEventListener('DOMContentLoaded', () => {
     loadQuests();
+    loadTheme();
     // Ensure form is hidden by default
     questFormContainer.classList.add('hidden');
 });
@@ -26,6 +55,7 @@ newQuestBtn.addEventListener('click', showQuestForm);
 cancelBtn.addEventListener('click', hideQuestForm);
 questForm.addEventListener('submit', handleFormSubmit);
 showCompletedCheckbox.addEventListener('change', toggleCompletedQuests);
+themeToggle.addEventListener('click', toggleTheme);
 
 // Functions
 async function loadQuests() {

@@ -1,12 +1,14 @@
-/* Modern Minimalist CSS (Notion-inspired) */
+/* Modern Minimalist CSS (Notion-inspired) with Dark Mode */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 :root {
+    /* Light theme variables */
     --primary-color: #2563eb;
     --text-color: #374151;
     --background-color: #f9fafb;
@@ -15,6 +17,20 @@
     --hover-color: #f3f4f6;
     --delete-color: #ef4444;
     --success-color: #10b981;
+    --form-bg: rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] {
+    /* Dark theme variables */
+    --primary-color: #3b82f6;
+    --text-color: #e5e7eb;
+    --background-color: #111827;
+    --card-color: #1f2937;
+    --border-color: #374151;
+    --hover-color: #374151;
+    --delete-color: #f87171;
+    --success-color: #34d399;
+    --form-bg: rgba(0, 0, 0, 0.7);
 }
 
 body {
@@ -31,6 +47,12 @@ header {
     padding: 1.5rem 2rem;
     background-color: var(--card-color);
     border-bottom: 1px solid var(--border-color);
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
 
 header h1 {
@@ -70,7 +92,7 @@ header h1 {
 }
 
 .btn-danger {
-    background-color: white;
+    background-color: var(--card-color);
     color: var(--delete-color);
     border: 1px solid var(--border-color);
     padding: 0.5rem;
@@ -80,7 +102,23 @@ header h1 {
 }
 
 .btn-danger:hover {
-    background-color: #fee2e2;
+    background-color: var(--hover-color);
+}
+
+/* Theme Toggle */
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 1rem;
+    padding: 0.5rem;
+    border-radius: 0.375rem;
+    background-color: var(--hover-color);
+}
+
+.theme-toggle i {
+    font-size: 1rem;
+    color: var(--text-color);
 }
 
 /* Main Content Styles */
@@ -97,7 +135,7 @@ main {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: var(--form-bg);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -105,7 +143,7 @@ main {
 }
 
 .form-wrapper {
-    background-color: white;
+    background-color: var(--card-color);
     padding: 2rem;
     border-radius: 0.5rem;
     width: 90%;
@@ -119,6 +157,7 @@ main {
     margin-bottom: 1.5rem;
     font-weight: 600;
     font-size: 1.25rem;
+    color: var(--text-color);
 }
 
 .form-group {
@@ -130,6 +169,7 @@ main {
     margin-bottom: 0.5rem;
     font-weight: 500;
     font-size: 0.875rem;
+    color: var(--text-color);
 }
 
 .form-group input,
@@ -140,7 +180,8 @@ main {
     border: 1px solid var(--border-color);
     border-radius: 0.375rem;
     font-size: 0.875rem;
-    background-color: white;
+    background-color: var(--card-color);
+    color: var(--text-color);
 }
 
 .form-group textarea {
@@ -212,6 +253,7 @@ main {
     font-size: 1rem;
     font-weight: 600;
     word-break: break-word;
+    color: var(--text-color);
 }
 
 .quest-type {
@@ -230,6 +272,7 @@ main {
     margin-bottom: 1rem;
     white-space: pre-line;
     font-size: 0.875rem;
+    color: var(--text-color);
 }
 
 .quest-info {
@@ -252,6 +295,7 @@ main {
     display: flex;
     align-items: center;
     margin-bottom: 1.5rem;
+    color: var(--text-color);
 }
 
 .toggle-completed input {
@@ -272,6 +316,10 @@ main {
         padding: 1rem;
     }
     
+    .header-left {
+        flex-direction: column;
+    }
+    
     #quest-board {
         grid-template-columns: 1fr;
         gap: 1rem;
@@ -284,44 +332,84 @@ main {
     }
 }
 
-/* Quest Type Badges */
-.quest-type {
-    background-color: #e5e7eb;
-    color: #4b5563;
+/* Quest Type Badges - Light & Dark Mode */
+/* Light Mode */
+:root {
+    --combat-bg: #fee2e2;
+    --combat-text: #b91c1c;
+    --exploration-bg: #d1fae5;
+    --exploration-text: #047857;
+    --social-bg: #e0e7ff;
+    --social-text: #4338ca;
+    --investigation-bg: #fef3c7;
+    --investigation-text: #b45309;
+    --rescue-bg: #dbeafe;
+    --rescue-text: #1d4ed8;
+    --delivery-bg: #f3e8ff;
+    --delivery-text: #7e22ce;
+    --escort-bg: #ccfbf1;
+    --escort-text: #0f766e;
+    --bounty-bg: #ffe4e6;
+    --bounty-text: #be123c;
+    --other-bg: #f3f4f6;
+    --other-text: #4b5563;
 }
+
+/* Dark Mode */
+[data-theme="dark"] {
+    --combat-bg: rgba(185, 28, 28, 0.2);
+    --combat-text: #ef4444;
+    --exploration-bg: rgba(4, 120, 87, 0.2);
+    --exploration-text: #10b981;
+    --social-bg: rgba(67, 56, 202, 0.2);
+    --social-text: #818cf8;
+    --investigation-bg: rgba(180, 83, 9, 0.2);
+    --investigation-text: #f59e0b;
+    --rescue-bg: rgba(29, 78, 216, 0.2);
+    --rescue-text: #3b82f6;
+    --delivery-bg: rgba(126, 34, 206, 0.2);
+    --delivery-text: #a855f7;
+    --escort-bg: rgba(15, 118, 110, 0.2);
+    --escort-text: #14b8a6;
+    --bounty-bg: rgba(190, 18, 60, 0.2);
+    --bounty-text: #f43f5e;
+    --other-bg: rgba(75, 85, 99, 0.2);
+    --other-text: #9ca3af;
+}
+
 .quest-card[data-type="Combat"] .quest-type {
-    background-color: #fee2e2;
-    color: #b91c1c;
+    background-color: var(--combat-bg);
+    color: var(--combat-text);
 }
 .quest-card[data-type="Exploration"] .quest-type {
-    background-color: #d1fae5;
-    color: #047857;
+    background-color: var(--exploration-bg);
+    color: var(--exploration-text);
 }
 .quest-card[data-type="Social"] .quest-type {
-    background-color: #e0e7ff;
-    color: #4338ca;
+    background-color: var(--social-bg);
+    color: var(--social-text);
 }
 .quest-card[data-type="Investigation"] .quest-type {
-    background-color: #fef3c7;
-    color: #b45309;
+    background-color: var(--investigation-bg);
+    color: var(--investigation-text);
 }
 .quest-card[data-type="Rescue"] .quest-type {
-    background-color: #dbeafe;
-    color: #1d4ed8;
+    background-color: var(--rescue-bg);
+    color: var(--rescue-text);
 }
 .quest-card[data-type="Delivery"] .quest-type {
-    background-color: #f3e8ff;
-    color: #7e22ce;
+    background-color: var(--delivery-bg);
+    color: var(--delivery-text);
 }
 .quest-card[data-type="Escort"] .quest-type {
-    background-color: #ccfbf1;
-    color: #0f766e;
+    background-color: var(--escort-bg);
+    color: var(--escort-text);
 }
 .quest-card[data-type="Bounty"] .quest-type {
-    background-color: #ffe4e6;
-    color: #be123c;
+    background-color: var(--bounty-bg);
+    color: var(--bounty-text);
 }
 .quest-card[data-type="Other"] .quest-type {
-    background-color: #f3f4f6;
-    color: #4b5563;
+    background-color: var(--other-bg);
+    color: var(--other-text);
 }
