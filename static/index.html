@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D&D Side Quest Board</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <h1>D&D Side Quest Board</h1>
+        <button id="new-quest-btn" class="btn-primary">+ New Quest</button>
+    </header>
+
+    <main>
+        <section id="quest-form-container" class="hidden">
+            <div class="form-wrapper">
+                <h2>Create New Quest</h2>
+                <form id="quest-form">
+                    <div class="form-group">
+                        <label for="title">Quest Title</label>
+                        <input type="text" id="title" name="title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="quest-type">Quest Type</label>
+                        <select id="quest-type" name="quest_type" required>
+                            <option value="" disabled selected>Select a quest type</option>
+                            <option value="Combat">Combat</option>
+                            <option value="Exploration">Exploration</option>
+                            <option value="Social">Social</option>
+                            <option value="Investigation">Investigation</option>
+                            <option value="Rescue">Rescue</option>
+                            <option value="Delivery">Delivery</option>
+                            <option value="Escort">Escort</option>
+                            <option value="Bounty">Bounty</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Quest Description</label>
+                        <textarea id="description" name="description" rows="4" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="reward">Quest Reward(s)</label>
+                        <input type="text" id="reward" name="reward" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="creator">Quest Creator</label>
+                        <input type="text" id="creator" name="creator" required>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" id="cancel-btn" class="btn-secondary">Cancel</button>
+                        <button type="submit" class="btn-primary">Submit Quest</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <div class="toggle-completed">
+            <input type="checkbox" id="show-completed" name="show-completed">
+            <label for="show-completed">Show Completed Quests</label>
+        </div>
+        
+        <section id="quest-board">
+            <div class="board-column" id="active-quests-column">
+                <h2>Active Quests</h2>
+                <div id="active-quests" class="quest-list"></div>
+            </div>
+            <div class="board-column hidden" id="completed-quests-column">
+                <h2>Completed Quests</h2>
+                <div id="completed-quests" class="quest-list"></div>
+            </div>
+        </section>
+    </main>
+
+    <template id="quest-card-template">
+        <div class="quest-card" data-id="">
+            <div class="quest-header">
+                <h3 class="quest-title"></h3>
+                <span class="quest-type"></span>
+            </div>
+            <div class="quest-body">
+                <p class="quest-description"></p>
+                <div class="quest-info">
+                    <p><strong>Reward:</strong> <span class="quest-reward"></span></p>
+                    <p><strong>Posted by:</strong> <span class="quest-creator"></span></p>
+                </div>
+            </div>
+            <div class="quest-footer">
+                <button class="complete-btn btn-secondary">
+                    <i class="fas fa-check"></i> Complete
+                </button>
+                <button class="delete-btn btn-danger">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+        </div>
+    </template>
+
+    <script src="app.js"></script>
+</body>
+</html>
